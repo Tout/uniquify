@@ -15,7 +15,7 @@ module Uniquify
       options = { :length => 8, :chars => ('a'..'z').to_a + ('A'..'Z').to_a + ('0'..'9').to_a }
       options.merge!(args.pop) if args.last.kind_of? Hash
       args.each do |name|
-        before_validation :on => :create
+        before_validation :on => :create do
           next if self.send(name).present?
           if block
             self.ensure_unique(name, &block)
@@ -27,7 +27,6 @@ module Uniquify
         end
       end
     end
-
   end
 end
 
